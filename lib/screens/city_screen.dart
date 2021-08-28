@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
+import 'dart:ui';
 
 class CityScreen extends StatefulWidget {
   @override
@@ -15,48 +16,58 @@ class _CityScreenState extends State<CityScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/city_background.jpg'),
+            image: AssetImage('images/3bbccc23ecf2aebe5858b762e15cd8f3.jpg'),
             fit: BoxFit.cover,
           ),
         ),
-        constraints: BoxConstraints.expand(),
-        child: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.topLeft,
-                child: FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    size: 50.0,
+        // constraints: BoxConstraints.expand(),
+
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 5,
+            sigmaY: 5,
+          ),
+          child: Container(
+            color: Colors.black.withOpacity(0.1),
+            child: SafeArea(
+              child: Column(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 50.0,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(20.0),
-                child: TextField(
-                  style: TextStyle(
-                    color: Colors.black,
+                  Container(
+                    padding: EdgeInsets.all(20.0),
+                    child: TextField(
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                      decoration: kTextFieldInputDecoration,
+                      onChanged: (value) {
+                        cityName = value;
+                      },
+                    ),
                   ),
-                  decoration: kTextFieldInputDecoration,
-                  onChanged: (value) {
-                    cityName = value;
-                  },
-                ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, cityName);
+                    },
+                    child: Text(
+                      'Get Weather',
+                      style: kButtonTextStyle,
+                    ),
+                  ),
+                ],
               ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context, cityName);
-                },
-                child: Text(
-                  'Get Weather',
-                  style: kButtonTextStyle,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
