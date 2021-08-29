@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
 import 'package:clima/services/weather.dart';
 import 'city_screen.dart';
-import 'dart:ui';
+import 'dart:ui' as ui;
+import 'about.dart';
 
 class LocationScreen extends StatefulWidget {
   LocationScreen({this.locationWeather});
@@ -50,8 +51,10 @@ class _LocationScreenState extends State<LocationScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Color(0x44000000),
-        title: Text('Climate App'),
+        shadowColor: Colors.transparent,
+        // backgroundColor: Color(0x44000000),
+        backgroundColor: Colors.transparent,
+        title: Text('$cityName'),
         centerTitle: true,
       ),
       drawer: Drawer(
@@ -106,6 +109,18 @@ class _LocationScreenState extends State<LocationScreen> {
                 ),
               ),
             ),
+            TextButton(
+              child: ListTile(
+                title: const Text('About'),
+                leading: Icon(Icons.info),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return About();
+                }));
+              },
+            ),
           ],
         ),
       ),
@@ -120,7 +135,7 @@ class _LocationScreenState extends State<LocationScreen> {
         ),
         constraints: BoxConstraints.expand(),
         child: BackdropFilter(
-          filter: ImageFilter.blur(
+          filter: ui.ImageFilter.blur(
             sigmaX: 5,
             sigmaY: 5,
           ),
@@ -128,30 +143,68 @@ class _LocationScreenState extends State<LocationScreen> {
             color: Colors.black.withOpacity(0.1),
             child: SafeArea(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(left: 15.0),
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          '$temperature°',
-                          style: kTempTextStyle,
-                        ),
-                        Text(
-                          weatherIcon,
-                          style: kConditionTextStyle,
-                        ),
-                      ],
-                    ),
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        textBaseline: TextBaseline.alphabetic,
+                        verticalDirection: VerticalDirection.up,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        children: [
+                          Text(
+                            '14',
+                            style: kTempTextStyle,
+                          ),
+                          Text(
+                            '°c',
+                            style: TextStyle(
+                              fontSize: 30,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text('cloudy'),
+                      Text('air purify percenteage'),
+                    ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 15.0),
-                    child: Text(
-                      '$weatherMessage in $cityName',
-                      textAlign: TextAlign.right,
-                      style: kMessageTextStyle,
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(20, 50, 20, 20),
+                      padding: EdgeInsets.all(25),
+                      decoration: BoxDecoration(
+                        color: ui.Color(0xB381A1C1),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text('hello'),
+                                Text('hello'),
+                                Text('hello'),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text('hello'),
+                                Text('hello'),
+                                Text('hello'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -163,3 +216,27 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
+
+// Padding(
+// padding: EdgeInsets.only(left: 15.0),
+// child: Row(
+// children: <Widget>[
+// Text(
+// '$temperature°',
+// style: kTempTextStyle,
+// ),
+// Text(
+// weatherIcon,
+// style: kConditionTextStyle,
+// ),
+// ],
+// ),
+// ),
+// Padding(
+// padding: EdgeInsets.only(right: 15.0),
+// child: Text(
+// '$weatherMessage in $cityName',
+// textAlign: TextAlign.right,
+// style: kMessageTextStyle,
+// ),
+// ),
