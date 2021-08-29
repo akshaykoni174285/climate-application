@@ -30,3 +30,6 @@ flutter:
     fonts:
     - asset: fonts/SpartanMB-Black.otf
       weight: 900
+  - family: Nothing
+    fonts:
+    - asset: fonts/NothingYouCouldDo-Regular.ttf

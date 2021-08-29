@@ -80,7 +80,7 @@ class _LocationScreenState extends State<LocationScreen> {
       ),
       drawer: Drawer(
         child: Container(
-          color: Color(0xB381A1C1),
+          color: Color(0xFF4C566A),
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
@@ -88,7 +88,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 padding: EdgeInsets.all(0),
                 // margin: EdgeInsets.only(top: 50),
                 decoration: BoxDecoration(
-                  color: Color(0xFF81A1C1),
+                  // color: Color(0xFF434C5E),
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage('images/location_background.jpg'),
@@ -107,6 +107,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   title: const Text('Current Location Weather'),
                   leading: Icon(
                     Icons.near_me,
+                    color: Color(0xFF2E3440),
                   ),
                 ),
               ),
@@ -130,13 +131,17 @@ class _LocationScreenState extends State<LocationScreen> {
                   title: const Text('Search Location'),
                   leading: Icon(
                     Icons.search,
+                    color: Color(0xFF2E3440),
                   ),
                 ),
               ),
               TextButton(
                 child: ListTile(
                   title: const Text('About'),
-                  leading: Icon(Icons.info),
+                  leading: Icon(
+                    Icons.info,
+                    color: Color(0xFF2E3440),
+                  ),
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -340,27 +345,3 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
-
-// Padding(
-// padding: EdgeInsets.only(left: 15.0),
-// child: Row(
-// children: <Widget>[
-// Text(
-// '$temperature°',
-// style: kTempTextStyle,
-// ),
-// Text(
-// weatherIcon,
-// style: kConditionTextStyle,
-// ),
-// ],
-// ),
-// ),
-// Padding(
-// padding: EdgeInsets.only(right: 15.0),
-// child: Text(
-// '$weatherMessage in $cityName',
-// textAlign: TextAlign.right,
-// style: kMessageTextStyle,
-// ),
-// ),
