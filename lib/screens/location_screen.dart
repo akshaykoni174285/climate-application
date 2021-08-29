@@ -20,6 +20,10 @@ class _LocationScreenState extends State<LocationScreen> {
   String weatherIcon;
   String cityName;
   String weatherMessage;
+  int feels_like;
+  var wind_speed;
+  int humdity;
+  int pressure;
 
   @override
   void initState() {
@@ -37,6 +41,14 @@ class _LocationScreenState extends State<LocationScreen> {
         cityName = '';
         return;
       }
+      wind_speed = weatherData['wind']['speed'];
+
+      print(wind_speed);
+      humdity = weatherData['main']['humidity'];
+      print(humdity);
+      double feels = weatherData['main']['feels_like'];
+      feels_like = feels.toInt();
+      print(feels_like);
       double temp = weatherData['main']['temp'];
       temperature = temp.toInt();
       var condition = weatherData['weather'][0]['id'];
@@ -146,7 +158,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Row(
@@ -167,7 +179,13 @@ class _LocationScreenState extends State<LocationScreen> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 7,
+                      ),
                       Text('cloudy'),
+                      SizedBox(
+                        height: 30,
+                      ),
                       Text('air purify percenteage'),
                     ],
                   ),
@@ -187,9 +205,28 @@ class _LocationScreenState extends State<LocationScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text('hello'),
-                                Text('hello'),
-                                Text('hello'),
+                                Container(
+                                  child: Column(
+                                    children: [
+                                      Text('Real feel'),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text('$feels_like°c'),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  child: Column(
+                                    children: [
+                                      Text('Wind speed'),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text('hello'),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -197,9 +234,28 @@ class _LocationScreenState extends State<LocationScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text('hello'),
-                                Text('hello'),
-                                Text('hello'),
+                                Container(
+                                  child: Column(
+                                    children: [
+                                      Text('Humidity'),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text('$humdity%'),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  child: Column(
+                                    children: [
+                                      Text('Pressure'),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text('hello'),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
