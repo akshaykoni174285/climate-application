@@ -50,16 +50,69 @@ class _LocationScreenState extends State<LocationScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: Color(0x44000000),
         title: Text('Climate App'),
         centerTitle: true,
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              padding: EdgeInsets.all(0),
+              margin: EdgeInsets.only(top: 50),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('images/location_background.jpg'),
+                ),
+                color: Color(0xFF4C566A),
+              ),
+              child: Text(''),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                var weatherData = await weather.getLocationWeather();
+                updateUI(weatherData);
+              },
+              child: ListTile(
+                title: const Text('Current Location Weather'),
+                leading: Icon(
+                  Icons.near_me,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                var typedName = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return CityScreen();
+                    },
+                  ),
+                );
+                if (typedName != null) {
+                  var weatherData = await weather.getCityWeather(typedName);
+                  updateUI(weatherData);
+                }
+              },
+              child: ListTile(
+                title: const Text('Search Location'),
+                leading: Icon(
+                  Icons.search,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'images/dap0psm-60254abc-8220-425c-8799-18096ef36690.jpg'),
+            image: AssetImage('images/3bbccc23ecf2aebe5858b762e15cd8f3.jpg'),
             fit: BoxFit.cover,
             // colorFilter: ColorFilter.mode(
             //     Colors.white.withOpacity(0.8), BlendMode.dstATop),
@@ -78,42 +131,6 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      FlatButton(
-                        onPressed: () async {
-                          var weatherData = await weather.getLocationWeather();
-                          updateUI(weatherData);
-                        },
-                        child: Icon(
-                          Icons.near_me,
-                          size: 50.0,
-                        ),
-                      ),
-                      FlatButton(
-                        onPressed: () async {
-                          var typedName = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return CityScreen();
-                              },
-                            ),
-                          );
-                          if (typedName != null) {
-                            var weatherData =
-                                await weather.getCityWeather(typedName);
-                            updateUI(weatherData);
-                          }
-                        },
-                        child: Icon(
-                          Icons.location_city,
-                          size: 50.0,
-                        ),
-                      ),
-                    ],
-                  ),
                   Padding(
                     padding: EdgeInsets.only(left: 15.0),
                     child: Row(
