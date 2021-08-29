@@ -24,6 +24,9 @@ class _LocationScreenState extends State<LocationScreen> {
   var wind_speed;
   int humdity;
   int pressure;
+  String description;
+  double min_temp;
+  double max_temp;
 
   @override
   void initState() {
@@ -41,14 +44,15 @@ class _LocationScreenState extends State<LocationScreen> {
         cityName = '';
         return;
       }
+      min_temp = weatherData['main']['temp_min'];
+      max_temp = weatherData['main']['temp_max'];
       wind_speed = weatherData['wind']['speed'];
+      pressure = weatherData['main']['pressure'];
 
-      print(wind_speed);
       humdity = weatherData['main']['humidity'];
-      print(humdity);
+
       double feels = weatherData['main']['feels_like'];
       feels_like = feels.toInt();
-      print(feels_like);
       double temp = weatherData['main']['temp'];
       temperature = temp.toInt();
       var condition = weatherData['weather'][0]['id'];
@@ -66,74 +70,83 @@ class _LocationScreenState extends State<LocationScreen> {
         shadowColor: Colors.transparent,
         // backgroundColor: Color(0x44000000),
         backgroundColor: Colors.transparent,
-        title: Text('$cityName'),
+        title: Text(
+          '$cityName',
+          style: TextStyle(
+            letterSpacing: 1,
+          ),
+        ),
         centerTitle: true,
       ),
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              padding: EdgeInsets.all(0),
-              margin: EdgeInsets.only(top: 50),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('images/location_background.jpg'),
-                ),
-                color: Color(0xFF4C566A),
-              ),
-              child: Text(''),
-            ),
-            TextButton(
-              onPressed: () async {
-                Navigator.pop(context);
-                var weatherData = await weather.getLocationWeather();
-                updateUI(weatherData);
-              },
-              child: ListTile(
-                title: const Text('Current Location Weather'),
-                leading: Icon(
-                  Icons.near_me,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () async {
-                Navigator.pop(context);
-                var typedName = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return CityScreen();
-                    },
+        child: Container(
+          color: Color(0xB381A1C1),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              const DrawerHeader(
+                padding: EdgeInsets.all(0),
+                // margin: EdgeInsets.only(top: 50),
+                decoration: BoxDecoration(
+                  color: Color(0xFF81A1C1),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('images/location_background.jpg'),
                   ),
-                );
-                if (typedName != null) {
-                  var weatherData = await weather.getCityWeather(typedName);
+                  // color: Color(0xFF81A1C1),
+                ),
+                child: Text(''),
+              ),
+              TextButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                  var weatherData = await weather.getLocationWeather();
                   updateUI(weatherData);
-                }
-              },
-              child: ListTile(
-                title: const Text('Search Location'),
-                leading: Icon(
-                  Icons.search,
+                },
+                child: ListTile(
+                  title: const Text('Current Location Weather'),
+                  leading: Icon(
+                    Icons.near_me,
+                  ),
                 ),
               ),
-            ),
-            TextButton(
-              child: ListTile(
-                title: const Text('About'),
-                leading: Icon(Icons.info),
+              TextButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                  var typedName = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return CityScreen();
+                      },
+                    ),
+                  );
+                  if (typedName != null) {
+                    var weatherData = await weather.getCityWeather(typedName);
+                    updateUI(weatherData);
+                  }
+                },
+                child: ListTile(
+                  title: const Text('Search Location'),
+                  leading: Icon(
+                    Icons.search,
+                  ),
+                ),
               ),
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return About();
-                }));
-              },
-            ),
-          ],
+              TextButton(
+                child: ListTile(
+                  title: const Text('About'),
+                  leading: Icon(Icons.info),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return About();
+                  }));
+                },
+              ),
+            ],
+          ),
         ),
       ),
       body: Container(
@@ -182,17 +195,20 @@ class _LocationScreenState extends State<LocationScreen> {
                       SizedBox(
                         height: 7,
                       ),
-                      Text('cloudy'),
-                      SizedBox(
-                        height: 30,
+                      Text(
+                        '$weatherIcon',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
+                        ),
                       ),
-                      Text('air purify percenteage'),
                     ],
                   ),
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.fromLTRB(20, 50, 20, 20),
-                      padding: EdgeInsets.all(25),
+                      padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: ui.Color(0xB381A1C1),
                         borderRadius: BorderRadius.all(
@@ -208,22 +224,48 @@ class _LocationScreenState extends State<LocationScreen> {
                                 Container(
                                   child: Column(
                                     children: [
-                                      Text('Real feel'),
+                                      Text(
+                                        'Minimum temp',
+                                      ),
                                       SizedBox(
                                         height: 8,
                                       ),
-                                      Text('$feels_like°c'),
+                                      Text(
+                                        '$min_temp°c',
+                                        style: KDetailStyle,
+                                      ),
                                     ],
                                   ),
                                 ),
                                 Container(
                                   child: Column(
                                     children: [
-                                      Text('Wind speed'),
+                                      Text(
+                                        'Real feel',
+                                      ),
                                       SizedBox(
                                         height: 8,
                                       ),
-                                      Text('hello'),
+                                      Text(
+                                        '$feels_like°c',
+                                        style: KDetailStyle,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'Wind speed',
+                                      ),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text(
+                                        '$wind_speed Km/h',
+                                        style: KDetailStyle,
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -237,22 +279,48 @@ class _LocationScreenState extends State<LocationScreen> {
                                 Container(
                                   child: Column(
                                     children: [
-                                      Text('Humidity'),
+                                      Text(
+                                        'Maximum temp',
+                                      ),
                                       SizedBox(
                                         height: 8,
                                       ),
-                                      Text('$humdity%'),
+                                      Text(
+                                        '$max_temp°c',
+                                        style: KDetailStyle,
+                                      ),
                                     ],
                                   ),
                                 ),
                                 Container(
                                   child: Column(
                                     children: [
-                                      Text('Pressure'),
+                                      Text(
+                                        'Humidity',
+                                      ),
                                       SizedBox(
                                         height: 8,
                                       ),
-                                      Text('hello'),
+                                      Text(
+                                        '$humdity%',
+                                        style: KDetailStyle,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'Pressure',
+                                      ),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text(
+                                        '$pressure mbar',
+                                        style: KDetailStyle,
+                                      ),
                                     ],
                                   ),
                                 ),
