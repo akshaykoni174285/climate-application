@@ -206,11 +206,12 @@ class _LocationScreenState extends State<LocationScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Expanded(
+                      flex: 70,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                          Container(
+                            margin: EdgeInsets.only(top: 35),
                             child: Row(
                               textBaseline: TextBaseline.alphabetic,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -236,18 +237,21 @@ class _LocationScreenState extends State<LocationScreen> {
                           SizedBox(
                             height: 10,
                           ),
-                          Container(
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                              child: Text(
-                                '$weatherdes',
-                                // 'heavy intensity drizzle rain	',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 2,
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.symmetric(vertical: 20),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(
+                                  '$weatherdes',
+                                  // 'heavy intensity drizzle rain	',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),
@@ -255,8 +259,9 @@ class _LocationScreenState extends State<LocationScreen> {
                       ),
                     ),
                     Expanded(
+                      flex: 100,
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: ui.Color(0xB381A1C1),
