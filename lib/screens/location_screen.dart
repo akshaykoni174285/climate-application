@@ -57,8 +57,8 @@ class _LocationScreenState extends State<LocationScreen> {
       double temp = weatherData['main']['temp'];
       temperature = temp.toInt();
       var condition = weatherData['weather'][0]['id'];
-      weatherdes = weather.getWeatherIcon(condition);
-      weatherMessage = weather.getMessage(temperature);
+      weatherdes = weather.getWeatherDes(condition);
+      //weatherMessage = weather.getMessage(temperature);
       cityName = weatherData['name'];
     });
   }
@@ -210,7 +210,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 40, 0, 20),
+                            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                             child: Row(
                               textBaseline: TextBaseline.alphabetic,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -236,17 +236,19 @@ class _LocationScreenState extends State<LocationScreen> {
                           SizedBox(
                             height: 10,
                           ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                            child: Text(
-                              '$weatherdes',
-                              // 'heavy intensity drizzle rain	',
-                              style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 2,
+                          Container(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                              child: Text(
+                                '$weatherdes',
+                                // 'heavy intensity drizzle rain	',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 2,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
                             ),
                           ),
                         ],

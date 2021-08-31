@@ -43,7 +43,7 @@ class WeatherModel {
   //     return '🤷‍';
   //   }
   // }
-  String getWeatherIcon(int condition) {
+  String getWeatherDes(int condition) {
     if (condition == 200) return 'thunderstorm with light rain';
     if (condition == 201) return 'thunderstorm with rain';
     if (condition == 202) return 'thunderstorm with heavy rain';
@@ -111,15 +111,15 @@ class WeatherModel {
     }
   }
 
-  String getMessage(int temp) {
-    if (temp > 25) {
-      return 'It\'s 🍦 time';
-    } else if (temp > 20) {
-      return 'Time for shorts and 👕';
-    } else if (temp < 10) {
-      return 'You\'ll need 🧣 and 🧤';
-    } else {
-      return 'Bring a 🧥 just in case';
-    }
-  }
+  // String getMessage(int temp) {
+  //   if (temp > 25) {
+  //     return 'It\'s 🍦 time';
+  //   } else if (temp > 20) {
+  //     return 'Time for shorts and 👕';
+  //   } else if (temp < 10) {
+  //     return 'You\'ll need 🧣 and 🧤';
+  //   } else {
+  //     return 'Bring a 🧥 just in case';
+  //   }
+  // }
 }

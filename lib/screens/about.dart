@@ -33,7 +33,7 @@ class _AboutState extends State<About> {
                   padding: EdgeInsets.all(30),
                   child: Text(
                     'Hey, \n we are the students from KLE Engineering College have developed this small weather app using flutter and dart\n\n This project is open source so check out the github for source code'
-                    'the code\n\n The name of contributers are \n\n >  Viraj\n\n >  Pranav\n\n >  Satyam\n\n >  Akshay ',
+                    '\n\n The name of contributers are \n\n >  Viraj\n\n >  Pranav\n\n >  Satyam\n\n >  Akshay ',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
