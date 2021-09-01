@@ -51,7 +51,7 @@ class _LocationScreenState extends State<LocationScreen> {
       pressure = weatherData['main']['pressure'];
 
       humdity = weatherData['main']['humidity'];
-
+      var countryname = weatherData['sys']['country'];
       double feels = weatherData['main']['feels_like'];
       feels_like = feels.toInt();
       double temp = weatherData['main']['temp'];
