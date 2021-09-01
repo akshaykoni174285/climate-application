@@ -18,16 +18,16 @@ class LocationScreen extends StatefulWidget {
 class _LocationScreenState extends State<LocationScreen> {
   WeatherModel weather = WeatherModel();
   int temperature;
-  String weatherdes;
-  String cityName;
-  String weatherMessage;
-  int feels_like;
+  var weatherdes;
+  var cityName;
+  var weatherMessage;
+  var feels_like;
   var wind_speed;
-  int humdity;
-  int pressure;
-  String description;
-  double min_temp;
-  double max_temp;
+  var humdity;
+  var pressure;
+  var description;
+  var min_temp;
+  var max_temp;
 
   @override
   void initState() {
@@ -162,24 +162,24 @@ class _LocationScreenState extends State<LocationScreen> {
                     }));
                   },
                 ),
-                TextButton(
-                  onPressed: () async {
-                    const url =
-                        'https://github.com/akshaykoni174285/climate-application';
-                    if (await canLaunch(url)) {
-                      await launch(url, forceSafariVC: true);
-                    } else {
-                      throw 'could not launch the url';
-                    }
-                  },
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.code,
-                      color: Color(0xFF2E3440),
-                    ),
-                    title: const Text('Github'),
-                  ),
-                ),
+                // TextButton(
+                //   onPressed: () async {
+                //     const url =
+                //         'https://github.com/akshaykoni174285/climate-application';
+                //     if (await canLaunch(url)) {
+                //       await launch(url, forceSafariVC: true);
+                //     } else {
+                //       throw 'could not launch the url';
+                //     }
+                //   },
+                //   child: ListTile(
+                //     leading: Icon(
+                //       Icons.code,
+                //       color: Color(0xFF2E3440),
+                //     ),
+                //     title: const Text('Github'),
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -225,10 +225,13 @@ class _LocationScreenState extends State<LocationScreen> {
                                   '$temperature',
                                   style: kTempTextStyle,
                                 ),
-                                Text(
-                                  '°c',
-                                  style: TextStyle(
-                                    fontSize: 30,
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 13),
+                                  child: Text(
+                                    '°c',
+                                    style: TextStyle(
+                                      fontSize: 30,
+                                    ),
                                   ),
                                 ),
                               ],
