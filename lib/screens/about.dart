@@ -32,8 +32,7 @@ class _AboutState extends State<About> {
                 child: Container(
                   padding: EdgeInsets.all(30),
                   child: Text(
-                    'Hello, \n we are the students from KLE Engineering College have developed this small weather app using flutter and dart that shows some essential properties of climate at runtime\n'
-                    '\n\n The name of contributers are \n\n >  Viraj\n\n >  Pranav\n\n >  Satyam\n\n >  Akshay ',
+                    'Hello, \n Developed this small weather app using flutter and dart that shows some essential properties of climate at runtime\n',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
